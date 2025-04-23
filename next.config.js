@@ -3,9 +3,11 @@ const nextConfig = {
   images: {
     domains: ['example.com', 'images.unsplash.com'],
   },
-  // Enable experimental app directory if needed
+  // Enable experimental features if needed
   experimental: {
-    serverActions: true,
+    serverActions: {
+      allowedOrigins: ['localhost:3000'],
+    },
   },
 };
 
