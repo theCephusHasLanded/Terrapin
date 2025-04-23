@@ -1,0 +1,61 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model Product {
+  id          String     @id @default(cuid())
+  name        String
+  description String     @db.Text
+  price       Decimal    @db.Decimal(10, 2)
+  image       String?
+  category    String
+  inventory   Int        @default(0)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  cartItems   CartItem[]
+  orderItems  OrderItem[]
+}
+
+model CartItem {
+  id        String   @id @default(cuid())
+  quantity  Int
+  productId String
+  product   Product  @relation(fields: [productId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  orderId   String?
+  order     Order?   @relation(fields: [orderId], references: [id])
+
+  @@index([productId])
+  @@index([orderId])
+}
+
+model Order {
+  id         String     @id @default(cuid())
+  total      Decimal    @db.Decimal(10, 2)
+  status     OrderStatus @default(PENDING)
+  customerEmail String
+  customerName  String
+  shippingAddress String   @db.Text
+  items      CartItem[]
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  stripePaymentIntentId String? @unique
+}
+
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
