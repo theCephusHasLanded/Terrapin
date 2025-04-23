@@ -7,7 +7,7 @@ A modern, full-stack e-commerce boilerplate built with Next.js, TypeScript, Tail
 - **Frontend**: Next.js with TypeScript and App Router
 - **Styling**: Tailwind CSS
 - **Backend**: Next.js API Routes
-- **Database**: PlanetScale (MySQL-compatible)
+- **Database**: Supabase PostgreSQL
 - **ORM**: Prisma
 - **Deployment**: Vercel
 - **State Management**: React Context
@@ -29,14 +29,14 @@ A modern, full-stack e-commerce boilerplate built with Next.js, TypeScript, Tail
 
 - Node.js 16.8.0 or later
 - npm or yarn
-- PlanetScale account (or any MySQL-compatible database)
+- Supabase account (free tier)
 
 ### Installation
 
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/terrapin-ecommerce.git
+git clone https://github.com/theCephusHasLanded/Terrapin.git
 cd terrapin-ecommerce
 ```
 
@@ -53,7 +53,7 @@ yarn install
 Create a `.env` file in the root directory based on `.env.example`:
 
 ```
-DATABASE_URL="mysql://username:password@aws.connect.psdb.cloud/your-database-name?sslaccept=strict"
+DATABASE_URL="postgresql://postgres:[YOUR-PASSWORD]@db.[YOUR-PROJECT-REF].supabase.co:5432/postgres"
 STRIPE_SECRET_KEY=sk_test_123456789
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_123456789
 NEXT_PUBLIC_BASE_URL=http://localhost:3000
@@ -127,6 +127,10 @@ The database includes the following models:
 - `DELETE /api/cart`: Remove an item from the cart
 - `POST /api/checkout`: Process a checkout
 
+## Database Setup
+
+For detailed instructions on setting up your Supabase database, see the [Database Setup Guide](DATABASE_SETUP.md).
+
 ## Deployment
 
 ### Deploying to Vercel
@@ -134,20 +138,19 @@ The database includes the following models:
 1. Push your repository to GitHub.
 2. Create a new project on [Vercel](https://vercel.com).
 3. Connect your GitHub repository to Vercel.
-4. Configure environment variables in the Vercel dashboard.
+4. Configure environment variables in the Vercel dashboard, including your Supabase DATABASE_URL.
 5. Deploy!
-
-### Deploying to PlanetScale
-
-1. Create a new database on [PlanetScale](https://planetscale.com).
-2. Get your database connection string.
-3. Add the connection string to your environment variables.
-4. Run `npx prisma db push` to create the tables.
-5. Run `npm run db:seed` to seed the database.
 
 ## Authentication (Future Expansion)
 
 To add authentication, we recommend:
+
+### Using Supabase Auth
+
+1. Install Supabase client: `npm install @supabase/supabase-js`
+2. Set up Supabase auth keys in your environment variables
+3. Create auth functionality using Supabase Auth API
+4. Secure routes using middleware
 
 ### Using NextAuth.js (Auth.js)
 
@@ -157,13 +160,6 @@ To add authentication, we recommend:
 4. Create a session provider component in `app/components/auth/SessionProvider.tsx`
 5. Wrap the app in the session provider
 6. Add protected routes using middleware
-
-### Using Clerk
-
-1. Install Clerk: `npm install @clerk/nextjs`
-2. Add Clerk API keys to your environment variables
-3. Create middleware to protect routes
-4. Use Clerk's pre-built components for sign-in, sign-up, and user profile
 
 ## Customization
 

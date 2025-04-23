@@ -1,48 +1,49 @@
-# PlanetScale Database Setup Guide
+# Supabase Database Setup Guide
 
-This guide provides step-by-step instructions for setting up your PlanetScale database for the Terrapin E-Commerce project.
+This guide provides step-by-step instructions for setting up your Supabase PostgreSQL database for the Terrapin E-Commerce project.
 
-## Why PlanetScale?
+## Why Supabase?
 
-PlanetScale is a serverless MySQL platform that offers:
-- Automatic scaling
-- Branching for database changes
-- Developer-friendly workflows
-- High performance and reliability
+Supabase is an open-source Firebase alternative that offers:
+- PostgreSQL database with a generous free tier
+- Auth, storage, and serverless functions
+- Real-time subscriptions
+- REST and GraphQL APIs
+- Simple dashboard interface
 
 ## Setup Process
 
-### 1. Create a PlanetScale Account
+### 1. Create a Supabase Account
 
-1. Go to [PlanetScale](https://planetscale.com/)
-2. Sign up for an account or log in
+1. Go to [Supabase](https://supabase.com/)
+2. Sign up for an account or log in with GitHub
 3. Verify your email if necessary
 
-### 2. Create a New Database
+### 2. Create a New Project
 
-1. From the PlanetScale dashboard, click "New Database"
-2. Fill in the database details:
+1. From the Supabase dashboard, click "New Project"
+2. Fill in the project details:
    - **Name**: `terrapin-ecommerce` (or your preferred name)
+   - **Database Password**: Create a strong password and save it securely
    - **Region**: Choose the closest to your users or development location
-   - **Plan**: Select the free plan for development or an appropriate paid plan for production
-3. Click "Create"
+   - **Pricing Plan**: Free tier (up to 2 projects)
+3. Click "Create new project" and wait for the setup to complete (may take a few minutes)
 
 ### 3. Get Your Database Connection String
 
-1. Once your database is created, click on it in the dashboard
-2. Click "Connect" button
-3. Select "Connect with Prisma"
-4. PlanetScale will display a connection string like:
+1. Once your project is created, go to Settings > Database in the left sidebar
+2. In the "Connection string" section, select "URI" format
+3. Copy the connection string that looks like:
    ```
-   DATABASE_URL="mysql://username:password@aws.connect.psdb.cloud/your-database-name?sslaccept=strict"
+   postgresql://postgres:[YOUR-PASSWORD]@db.[YOUR-PROJECT-REF].supabase.co:5432/postgres
    ```
-5. Copy this connection string
+4. Replace `[YOUR-PASSWORD]` with the database password you created
 
 ### 4. Configure Your Local Environment
 
 1. Create a `.env` file in your project root:
    ```
-   DATABASE_URL="your-connection-string-from-planetscale"
+   DATABASE_URL="your-connection-string-from-supabase"
    ```
 2. Make sure this file is in your `.gitignore` (it should be already)
 
@@ -58,7 +59,7 @@ PlanetScale is a serverless MySQL platform that offers:
    npx prisma generate
    ```
 
-3. Push your schema to PlanetScale:
+3. Push your schema to Supabase:
    ```bash
    npx prisma db push
    ```
@@ -76,7 +77,7 @@ This runs the seed script defined in `prisma/seed.ts` which creates sample produ
 
 ### 7. Verify Your Database Setup
 
-1. Check your PlanetScale dashboard to see the created tables
+1. Check your Supabase dashboard under "Table Editor" to see the created tables
 2. Run the development server:
    ```bash
    npm run dev
@@ -90,11 +91,22 @@ When deploying to Vercel or another hosting platform:
 1. Add your `DATABASE_URL` as an environment variable in your hosting platform
 2. Ensure the database connection is properly configured for production
 
-### 9. Database Management
+### 9. Database Management with Supabase
 
-- **Viewing Data**: Use the PlanetScale console to view your data or run queries
-- **Schema Changes**: For production, use PlanetScale's branching workflow to make schema changes safely
-- **Monitoring**: PlanetScale dashboard provides monitoring for your database
+- **Table Editor**: Use Supabase's built-in table editor to manage your data
+- **SQL Editor**: Write custom SQL queries directly in the Supabase dashboard
+- **API Documentation**: Auto-generated API docs to interact with your database
+- **Authentication**: Set up auth rules if you decide to add user authentication
+- **Monitoring**: View logs and monitor performance in the dashboard
+
+## Supabase-specific Features
+
+If you want to enhance your app with additional Supabase features:
+
+1. **Auth**: Implement authentication using Supabase Auth
+2. **Storage**: Store product images in Supabase Storage
+3. **Edge Functions**: Deploy serverless functions for backend logic
+4. **Realtime**: Subscribe to database changes for real-time updates
 
 ## Troubleshooting
 
@@ -102,16 +114,17 @@ If you encounter any issues:
 
 1. **Connection Issues**:
    - Verify your DATABASE_URL is correct
-   - Check that your IP is allowed (PlanetScale's free tier allows connections from anywhere)
+   - Check that your IP is allowed in Supabase dashboard (Settings > Database > Network)
 
 2. **Schema Push Failures**:
    - Check your `schema.prisma` file for syntax errors
-   - Verify that you're not trying to make breaking changes
+   - Verify that your Supabase project is fully initialized
 
 3. **Seeding Issues**:
    - Check for errors in your seed script
    - Verify that your seed data matches your schema
 
 For more help, refer to:
-- [PlanetScale Documentation](https://planetscale.com/docs)
+- [Supabase Documentation](https://supabase.com/docs)
 - [Prisma Documentation](https://www.prisma.io/docs)
+- [Prisma with PostgreSQL Guide](https://www.prisma.io/docs/getting-started/setup-prisma/add-to-existing-project/postgresql)

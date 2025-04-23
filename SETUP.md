@@ -6,38 +6,41 @@ After creating a repository on GitHub, connect your local repository and push th
 
 ```bash
 # Add the GitHub repository as a remote
-git remote add origin https://github.com/YOUR_USERNAME/terrapin-ecommerce.git
+git remote add origin https://github.com/theCephusHasLanded/Terrapin.git
 
 # Push your code to GitHub
 git push -u origin main
 ```
 
-## Database Setup with PlanetScale
+## Database Setup with Supabase
 
-Follow these steps to set up your database with PlanetScale:
+Follow these steps to set up your database with Supabase:
 
-1. **Create a PlanetScale account**:
-   - Go to [PlanetScale](https://planetscale.com/) and sign up or log in
+1. **Create a Supabase account**:
+   - Go to [Supabase](https://supabase.com/) and sign up or log in with GitHub
 
-2. **Create a new database**:
-   - Click on "New Database"
+2. **Create a new project**:
+   - Click "New Project"
    - Name your database (e.g., "terrapin-ecommerce")
+   - Set a secure database password (save this!)
    - Select a region close to your users
-   - Click "Create"
+   - Choose the free plan
+   - Click "Create new project"
 
 3. **Get your database connection string**:
-   - In your database dashboard, click "Connect"
-   - Select "Connect with Prisma"
-   - Copy the DATABASE_URL provided
+   - Go to Settings > Database in the left sidebar
+   - Find the "Connection string" section and select "URI" format
+   - Copy the PostgreSQL connection string provided
+   - Replace the password placeholder with your actual database password
 
 4. **Configure your local environment**:
    - Create a `.env` file in your project root (if not already created)
-   - Add your DATABASE_URL from PlanetScale:
+   - Add your DATABASE_URL from Supabase:
      ```
-     DATABASE_URL="mysql://username:password@aws.connect.psdb.cloud/your-database-name?sslaccept=strict"
+     DATABASE_URL="postgresql://postgres:your-password@db.your-project-ref.supabase.co:5432/postgres"
      ```
 
-5. **Push your schema to PlanetScale**:
+5. **Push your schema to Supabase**:
    ```bash
    npm install
    npx prisma generate
