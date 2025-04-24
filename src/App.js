@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider, CssBaseline } from '@mui/material';
+import { Analytics } from '@vercel/analytics/react';
 import theme from './theme';
 
 // Pages
@@ -39,6 +40,7 @@ function App() {
           </Routes>
         </Router>
       </CartProvider>
+      <Analytics />
     </ThemeProvider>
   );
 }
