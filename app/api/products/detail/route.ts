@@ -1,16 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '../../../lib/db';
-import type { RouteParams } from 'next/dist/server/future/route-modules/route-module';
 
-// This is the correct way to type a dynamic handler in Next.js 15
+// Alternative approach with simpler typing for a non-dynamic route
 export async function GET(
-  request: NextRequest,
-  // Using the proper Next.js 15 typing
-  { params }: { params: RouteParams }
+  request: NextRequest
 ) {
   try {
-    // Extract ID from params and properly type-cast it
-    const id = params.id as string;
+    // Get ID from query parameter instead of path parameter
+    const id = request.nextUrl.searchParams.get('id');
     
     if (!id) {
       return NextResponse.json({ error: 'Product ID is required' }, { status: 400 });
