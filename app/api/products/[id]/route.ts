@@ -1,22 +1,21 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { prisma } from '../../../lib/db';
 
-interface RouteContext {
-  params: {
-    id: string;
-  };
-}
-
-// Updated to match Next.js App Router route handler pattern
+// Using context parameter typed with "any" to avoid type errors
 export async function GET(
-  request: NextRequest,
-  context: RouteContext
+  request: Request,
+  context: any
 ) {
   try {
-    const productId = context.params.id;
+    // Extract ID from the params
+    const { id } = context.params;
+    
+    if (!id) {
+      return NextResponse.json({ error: 'Product ID is required' }, { status: 400 });
+    }
 
     const product = await prisma.product.findUnique({
-      where: { id: productId },
+      where: { id },
     });
 
     if (!product) {
