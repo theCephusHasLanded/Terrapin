@@ -128,8 +128,8 @@ const Footer = () => {
               <Link component={RouterLink} to="/privacy" color="inherit" underline="hover" sx={{ opacity: 0.7 }}>
                 Privacy Policy
               </Link>
-              <Link component={RouterLink} to="/terms" color="inherit" underline="hover" sx={{ opacity: 0.7 }}>
-                Terms of Service
+              <Link component={RouterLink} to="/terms-conditions" color="inherit" underline="hover" sx={{ opacity: 0.7 }}>
+                Terms & Conditions
               </Link>
             </Box>
           </Grid>

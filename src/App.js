@@ -15,6 +15,11 @@ import Shop from './pages/Shop';
 import About from './pages/About';
 import Collection from './pages/Collection';
 import Account from './pages/Account';
+import TermsConditions from './pages/TermsConditions';
+
+// Components
+import FeedbackBar from './components/common/FeedbackBar';
+import AIWidget from './components/common/AIWidget';
 
 // Context providers
 import { CartProvider } from './contexts/CartContext';
@@ -36,8 +41,13 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/checkout/success" element={<CheckoutSuccess />} />
+            <Route path="/terms-conditions" element={<TermsConditions />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          
+          {/* Global components */}
+          <FeedbackBar />
+          <AIWidget />
         </Router>
       </CartProvider>
       <Analytics />
