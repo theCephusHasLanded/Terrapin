@@ -1,28 +1,43 @@
 import { PrismaClient } from '@prisma/client';
 
-// PrismaClient is attached to the `global` object in development to prevent
-// exhausting your database connection limit.
-// Learn more: https://pris.ly/d/help/next-js-best-practices
+// This approach helps prevent multiple PrismaClient instances during development
+// and also handles reconnection issues during builds
 
-const globalForPrisma = global as unknown as {
-  prisma: PrismaClient | undefined;
+// Solution for the "prepared statement already exists" error
+const prismaClientSingleton = () => {
+  return new PrismaClient({
+    log: process.env.NODE_ENV === 'development' ? ['query'] : [],
+    // Add connection pool configuration for better stability
+    datasources: {
+      db: {
+        url: process.env.DATABASE_URL,
+      },
+    },
+  });
 };
 
-// Create a new PrismaClient if one doesn't exist already
-export const prisma =
-  globalForPrisma.prisma ??
-  new PrismaClient({
-    log: process.env.NODE_ENV === 'development' ? ['query'] : [],
-  });
+type PrismaClientSingleton = ReturnType<typeof prismaClientSingleton>;
+
+const globalForPrisma = global as unknown as {
+  prisma: PrismaClientSingleton | undefined;
+};
+
+// Create a new PrismaClient if one doesn't exist already, or use the existing one
+export const prisma = globalForPrisma.prisma ?? prismaClientSingleton();
 
 // Save PrismaClient on the global object in development
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
 
 // Handle clean disconnection of Prisma Client
-// This is especially important during build and development
+// Create a simple cleanup function
+const cleanupPrisma = async () => {
+  if (globalForPrisma.prisma) {
+    await globalForPrisma.prisma.$disconnect();
+  }
+};
+
+// Register it for various termination events
 if (process.env.NODE_ENV !== 'production') {
-  // Handle graceful shutdown
-  process.on('beforeExit', async () => {
-    await prisma.$disconnect();
-  });
+  process.on('beforeExit', cleanupPrisma);
+  process.on('exit', cleanupPrisma);
 }

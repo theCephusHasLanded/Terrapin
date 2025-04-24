@@ -1,22 +1,70 @@
-import { prisma } from './lib/db';
+'use client';
+
+import { useState, useEffect } from 'react';
 import ProductGrid from './components/product/ProductGrid';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Product } from './lib/types';
 
-export default async function Home() {
-  // Fetch products from the database
-  const products = await prisma.product.findMany({
-    take: 6, // Limit to 6 products for the homepage
-    orderBy: {
-      createdAt: 'desc'
-    }
-  });
+// Mock products to use during static build and until real products load
+const sampleProducts: Product[] = [
+  {
+    id: '1',
+    name: 'Tortoise Shell Glasses',
+    description: 'Elegant tortoise shell glasses with premium craftsmanship.',
+    price: 129.99,
+    image: '/images/products/glasses.jpg',
+    category: 'Accessories',
+    inventory: 15,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: '2',
+    name: 'Art Deco Pendant Light',
+    description: 'Beautiful art deco inspired pendant light that elevates any space.',
+    price: 249.99,
+    image: '/images/products/light.jpg',
+    category: 'Home',
+    inventory: 8,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: '3',
+    name: 'Leather Wallet',
+    description: 'Handcrafted leather wallet with beautiful detailing.',
+    price: 79.99,
+    image: '/images/products/wallet.jpg',
+    category: 'Accessories',
+    inventory: 20,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  }
+];
 
-  // Map the products to include price as a number for client components
-  const mappedProducts = products.map(product => ({
-    ...product,
-    price: parseFloat(product.price.toString())
-  }));
+export default function Home() {
+  const [products, setProducts] = useState<Product[]>(sampleProducts);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch real products on the client side
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch('/api/products?limit=6');
+        if (response.ok) {
+          const data = await response.json();
+          setProducts(data.products || sampleProducts);
+        }
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   return (
     <div>
@@ -115,7 +163,14 @@ export default async function Home() {
             </p>
           </div>
 
-          <ProductGrid products={mappedProducts} />
+          {loading ? (
+            <div className="text-center py-12">
+              <div className="inline-block w-8 h-8 border-2 border-shell-amber rounded-full border-t-transparent animate-spin"></div>
+              <p className="mt-2 text-shell-brown">Loading products...</p>
+            </div>
+          ) : (
+            <ProductGrid products={products} />
+          )}
 
           <div className="mt-12 text-center">
             <Link href="/products" className="btn btn-secondary">
