@@ -1,11 +1,11 @@
 // Core type definitions for the application
 
 export type Product = {
-  id: string;
+  id: string | bigint;  // Support both string and bigint for flexibility
   name: string;
   description: string;
   price: number;
-  image?: string;
+  image?: string | null;  // Allow null values
   category: string;
   inventory: number;
   createdAt: Date;
@@ -13,10 +13,10 @@ export type Product = {
 };
 
 export type CartItem = {
-  id: string;
+  id: string | bigint;
   quantity: number;
   product: Product;
-  productId: string;
+  productId: string | bigint;
 };
 
 export enum OrderStatus {
@@ -28,7 +28,7 @@ export enum OrderStatus {
 }
 
 export type Order = {
-  id: string;
+  id: string | bigint;
   total: number;
   status: OrderStatus;
   customerEmail: string;

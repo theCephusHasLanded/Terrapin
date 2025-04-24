@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useCart } from '../lib/cart-context';
 import CartItem from '../components/cart/CartItem';
@@ -15,10 +15,17 @@ export default function CheckoutPage() {
     shippingAddress: '',
   });
 
-  // If cart is empty, redirect to cart page
+  // Use useEffect for navigation to ensure it only runs on the client
+  useEffect(() => {
+    // If cart is empty, redirect to cart page
+    if (items.length === 0) {
+      router.push('/cart');
+    }
+  }, [items.length, router]);
+
+  // Early return during initial render or when items are empty
   if (items.length === 0) {
-    router.push('/cart');
-    return null;
+    return <div className="p-8 text-center">Checking your cart...</div>;
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

@@ -26,10 +26,10 @@ export default function ProductDetail({ product, relatedProducts }: ProductDetai
     }
   };
 
-  // Update API call to use the new endpoint if needed
+  // Update API call to use the non-dynamic endpoint
   const getProductDetails = async (id: string) => {
     try {
-      const response = await fetch(`/api/product?id=${id}`);
+      const response = await fetch(`/api/product-by-id?id=${id}`);
       if (!response.ok) throw new Error('Failed to fetch product');
       return await response.json();
     } catch (error) {

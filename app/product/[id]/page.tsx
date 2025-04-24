@@ -2,14 +2,17 @@ import { notFound } from 'next/navigation';
 import { prisma } from '../../lib/db';
 import ProductDetail from './ProductDetail';
 
-interface ProductPageProps {
-  params: {
-    id: string;
-  };
+// In Next.js 15, params is a Promise that needs to be awaited
+interface PageProps {
+  params: Promise<{ id: string }>;
 }
 
-export default async function ProductPage({ params }: ProductPageProps) {
-  const { id } = params;
+export default async function ProductPage({ params }: PageProps) {
+  const resolvedParams = await params;
+  const { id: idParam } = resolvedParams;
+
+  // Convert string ID to BigInt for Prisma
+  const id = BigInt(idParam);
 
   // Fetch the product from the database
   const product = await prisma.product.findUnique({
@@ -31,7 +34,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const relatedProducts = await prisma.product.findMany({
     where: {
       category: product.category,
-      id: { not: product.id }
+      id: { not: id } // Already converted to BigInt above
     },
     take: 4
   });

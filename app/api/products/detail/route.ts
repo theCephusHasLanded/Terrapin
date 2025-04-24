@@ -7,11 +7,14 @@ export async function GET(
 ) {
   try {
     // Get ID from query parameter instead of path parameter
-    const id = request.nextUrl.searchParams.get('id');
+    const idParam = request.nextUrl.searchParams.get('id');
     
-    if (!id) {
+    if (!idParam) {
       return NextResponse.json({ error: 'Product ID is required' }, { status: 400 });
     }
+
+    // Convert string ID to BigInt for Prisma
+    const id = BigInt(idParam);
 
     const product = await prisma.product.findUnique({
       where: { id },

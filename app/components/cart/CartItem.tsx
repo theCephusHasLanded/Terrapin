@@ -35,7 +35,7 @@ export default function CartItem({ item }: CartItemProps) {
       </div>
       <div className="flex items-center">
         <button 
-          onClick={() => updateQuantity(product.id, item.quantity - 1)}
+          onClick={() => updateQuantity(String(product.id), item.quantity - 1)}
           className="p-1 rounded-md text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -44,7 +44,7 @@ export default function CartItem({ item }: CartItemProps) {
         </button>
         <span className="mx-2 text-gray-900 dark:text-white">{item.quantity}</span>
         <button 
-          onClick={() => updateQuantity(product.id, item.quantity + 1)}
+          onClick={() => updateQuantity(String(product.id), item.quantity + 1)}
           className="p-1 rounded-md text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -58,7 +58,7 @@ export default function CartItem({ item }: CartItemProps) {
         </span>
       </div>
       <button 
-        onClick={() => removeItem(product.id)}
+        onClick={() => removeItem(String(product.id))}
         className="ml-4 p-1 rounded-md text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400"
       >
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">

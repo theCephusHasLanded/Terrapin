@@ -47,7 +47,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setItems((prevItems) => {
       // Check if product already exists in cart
       const existingItemIndex = prevItems.findIndex(
-        (item) => item.productId === product.id
+        (item) => String(item.productId) === String(product.id)
       );
 
       if (existingItemIndex > -1) {
@@ -73,7 +73,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   // Remove item from cart
   const removeItem = (productId: string) => {
     setItems((prevItems) => 
-      prevItems.filter((item) => item.productId !== productId)
+      prevItems.filter((item) => String(item.productId) !== productId)
     );
   };
 
@@ -86,7 +86,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
     setItems((prevItems) => 
       prevItems.map((item) => 
-        item.productId === productId 
+        String(item.productId) === productId 
           ? { ...item, quantity } 
           : item
       )
