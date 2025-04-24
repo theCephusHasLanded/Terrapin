@@ -1,17 +1,15 @@
-# Terrapin E-Commerce Boilerplate
+# Terrapin E-Commerce Platform
 
-A modern, full-stack e-commerce boilerplate built with Next.js, TypeScript, Tailwind CSS, and Prisma.
+A modern, full-stack e-commerce platform built with React, Material UI, and Spring Boot.
 
 ## Tech Stack
 
-- **Frontend**: Next.js with TypeScript and App Router
-- **Styling**: Tailwind CSS
-- **Backend**: Next.js API Routes
-- **Database**: Supabase PostgreSQL
-- **ORM**: Prisma
-- **Deployment**: Vercel
+- **Frontend**: React with Material UI
+- **Backend**: Spring Boot (Java)
+- **Database**: PostgreSQL
+- **ORM**: Spring Data JPA
 - **State Management**: React Context
-- **Payment Processing**: Stripe (placeholder integration)
+- **Payment Processing**: Stripe Integration
 
 ## Features
 

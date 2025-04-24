@@ -44,7 +44,7 @@ const Header = () => {
   const navItems = [
     { text: 'Home', path: '/' },
     { text: 'Shop', path: '/shop' },
-    { text: 'Collection', path: '/collection' },
+    { text: 'Collections', path: '/collections' },
     { text: 'About', path: '/about' },
   ];
 
@@ -142,7 +142,12 @@ const Header = () => {
         )}
 
         <Box>
-          <IconButton color="inherit" aria-label="account">
+          <IconButton 
+            color="inherit" 
+            aria-label="account"
+            component={RouterLink}
+            to="/account"
+          >
             <PersonIcon />
           </IconButton>
           <IconButton

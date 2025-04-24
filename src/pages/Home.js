@@ -180,20 +180,11 @@ const Home = () => {
                     overflow: 'hidden',
                     border: '2px solid',
                     borderColor: 'secondary.main',
+                    backgroundImage: 'url("https://images.unsplash.com/photo-1613909671501-f9678fdf1781?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80")',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
                   }}
                 >
-                  {/* Art Deco Decorative Element */}
-                  <Typography
-                    variant="h1"
-                    sx={{
-                      fontFamily: 'Playfair Display, serif',
-                      fontSize: '12rem',
-                      color: 'accent.light',
-                      opacity: 0.4,
-                    }}
-                  >
-                    T
-                  </Typography>
 
                   {/* Corner Accents */}
                   <Box
@@ -206,6 +197,8 @@ const Home = () => {
                       borderTop: '3px solid',
                       borderLeft: '3px solid',
                       borderColor: 'secondary.main',
+                      backgroundColor: 'rgba(255, 255, 255, 0.5)',
+                      zIndex: 1
                     }}
                   />
                   <Box
@@ -218,6 +211,8 @@ const Home = () => {
                       borderTop: '3px solid',
                       borderRight: '3px solid',
                       borderColor: 'secondary.main',
+                      backgroundColor: 'rgba(255, 255, 255, 0.5)',
+                      zIndex: 1
                     }}
                   />
                   <Box
@@ -230,6 +225,8 @@ const Home = () => {
                       borderBottom: '3px solid',
                       borderLeft: '3px solid',
                       borderColor: 'secondary.main',
+                      backgroundColor: 'rgba(255, 255, 255, 0.5)',
+                      zIndex: 1
                     }}
                   />
                   <Box
@@ -242,6 +239,8 @@ const Home = () => {
                       borderBottom: '3px solid',
                       borderRight: '3px solid',
                       borderColor: 'secondary.main',
+                      backgroundColor: 'rgba(255, 255, 255, 0.5)',
+                      zIndex: 1
                     }}
                   />
                 </Paper>
@@ -254,6 +253,50 @@ const Home = () => {
       {/* Features Section */}
       <Box sx={{ py: 8, bgcolor: 'background.paper' }}>
         <Container maxWidth="lg">
+          <Typography 
+            variant="h2" 
+            align="center" 
+            color="primary.main" 
+            sx={{ 
+              mb: 6, 
+              fontWeight: 600,
+              position: 'relative',
+              '&::after': {
+                content: '""',
+                display: 'block',
+                width: '80px',
+                height: '2px',
+                backgroundColor: 'secondary.main',
+                margin: '12px auto 0'
+              }
+            }}
+          >
+            The Terrapin Experience
+          </Typography>
+          <Box 
+            sx={{ 
+              width: '100%', 
+              height: '200px', 
+              mb: 6, 
+              backgroundImage: 'url("https://images.unsplash.com/photo-1518893494097-2f15f3c8e131?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80")', 
+              backgroundSize: 'cover',
+              backgroundPosition: 'center 30%',
+              borderRadius: 2,
+              position: 'relative',
+              boxShadow: 3,
+              display: {xs: 'none', md: 'block'},
+              '&::before': {
+                content: '""',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundColor: 'rgba(0, 0, 0, 0.3)',
+                borderRadius: 2,
+              }
+            }}
+          />
           <Grid container spacing={4}>
             <Grid item xs={12} md={4}>
               <Box sx={{ textAlign: 'center', p: 3 }}>
@@ -367,6 +410,21 @@ const Home = () => {
           py: 10,
           bgcolor: 'background.default',
           position: 'relative',
+          backgroundImage: 'url("https://images.unsplash.com/photo-1616627547482-63f776d18232?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed',
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+            backdropFilter: 'blur(2px)',
+            zIndex: 1
+          }
         }}
       >
         {/* Subtle pattern overlay */}
@@ -382,7 +440,7 @@ const Home = () => {
           }}
         />
 
-        <Container maxWidth="lg" sx={{ position: 'relative' }}>
+        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2 }}>
           <Box sx={{ textAlign: 'center', mb: 6 }}>
             <Typography
               variant="h2"
@@ -468,6 +526,20 @@ const Home = () => {
           color: 'primary.contrastText',
           position: 'relative',
           overflow: 'hidden',
+          backgroundImage: 'url("https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundBlendMode: 'multiply',
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(117, 84, 62, 0.85)', // primary.main with opacity
+            zIndex: 1,
+          }
         }}
       >
         {/* Top and bottom decorative lines */}
@@ -492,7 +564,7 @@ const Home = () => {
           }}
         />
 
-        <Container maxWidth="md" sx={{ textAlign: 'center' }}>
+        <Container maxWidth="md" sx={{ textAlign: 'center', position: 'relative', zIndex: 2 }}>
           <Typography
             variant="h3"
             sx={{
