@@ -26,6 +26,18 @@ export default function ProductDetail({ product, relatedProducts }: ProductDetai
     }
   };
 
+  // Update API call to use the new endpoint if needed
+  const getProductDetails = async (id: string) => {
+    try {
+      const response = await fetch(`/api/product?id=${id}`);
+      if (!response.ok) throw new Error('Failed to fetch product');
+      return await response.json();
+    } catch (error) {
+      console.error('Error fetching product:', error);
+      return null;
+    }
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="lg:grid lg:grid-cols-2 lg:gap-12">
