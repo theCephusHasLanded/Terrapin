@@ -1,10 +1,10 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '../../lib/db';
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   try {
     // Get URL parameters
-    const { searchParams } = new URL(request.url);
+    const searchParams = request.nextUrl.searchParams;
     const category = searchParams.get('category');
     const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit') as string) : undefined;
     const page = searchParams.get('page') ? parseInt(searchParams.get('page') as string) : 1;

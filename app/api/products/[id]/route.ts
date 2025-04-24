@@ -1,7 +1,11 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '../../../lib/db';
 
-export async function GET(request: Request, { params }: { params: { id: string } }) {
+// Updated to match Next.js App Router route handler pattern
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
   try {
     const productId = params.id;
 

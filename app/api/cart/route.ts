@@ -1,8 +1,8 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '../../lib/db';
 
 // GET cart - This would usually fetch from a database with session/user ID
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   try {
     // In a real app, you would get the cart from the database based on user session
     // This is a mockup that returns an empty cart
@@ -17,7 +17,7 @@ export async function GET(request: Request) {
 }
 
 // POST to add item to cart
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const { productId, quantity } = body;
@@ -71,7 +71,7 @@ export async function POST(request: Request) {
 }
 
 // PUT to update cart item
-export async function PUT(request: Request) {
+export async function PUT(request: NextRequest) {
   try {
     const body = await request.json();
     const { productId, quantity } = body;
@@ -100,10 +100,9 @@ export async function PUT(request: Request) {
 }
 
 // DELETE to remove item from cart
-export async function DELETE(request: Request) {
+export async function DELETE(request: NextRequest) {
   try {
-    const { searchParams } = new URL(request.url);
-    const productId = searchParams.get('productId');
+    const productId = request.nextUrl.searchParams.get('productId');
 
     if (!productId) {
       return NextResponse.json(
