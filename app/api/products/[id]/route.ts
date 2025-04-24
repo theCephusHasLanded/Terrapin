@@ -1,13 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '../../../lib/db';
 
+interface RouteContext {
+  params: {
+    id: string;
+  };
+}
+
 // Updated to match Next.js App Router route handler pattern
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: RouteContext
 ) {
   try {
-    const productId = params.id;
+    const productId = context.params.id;
 
     const product = await prisma.product.findUnique({
       where: { id: productId },
