@@ -1,6 +1,7 @@
 import { prisma } from './lib/db';
 import ProductGrid from './components/product/ProductGrid';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default async function Home() {
   // Fetch products from the database
@@ -19,81 +20,127 @@ export default async function Home() {
 
   return (
     <div>
-      {/* Hero section */}
-      <section className="bg-gradient-to-r from-primary-600 to-primary-800 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-4">
-              Welcome to Terrapin Shop
-            </h1>
-            <p className="text-xl max-w-2xl mx-auto">
-              Discover our handpicked products with fast shipping and top-notch quality.
-            </p>
-            <div className="mt-8">
-              <Link href="/#products" className="btn bg-white text-primary-700 hover:bg-gray-100">
-                Shop Now
+      {/* Art Deco Hero Section */}
+      <section className="relative overflow-hidden bg-shell-gold">
+        {/* Tortoise Shell Pattern Overlay */}
+        <div className="absolute inset-0 tortoise-overlay"></div>
+        
+        {/* Content */}
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 lg:py-40">
+          <div className="md:grid md:grid-cols-2 md:gap-16 items-center">
+            <div className="text-center md:text-left mb-12 md:mb-0">
+              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-shell-brown mb-6">
+                Curated Elegance
+              </h1>
+              <div className="w-32 h-1 bg-shell-amber mx-auto md:mx-0 mb-6"></div>
+              <p className="text-lg text-dark-brown max-w-xl mx-auto md:mx-0 mb-8">
+                Discover our handpicked collection of premium products, crafted with precision and designed for elegance.
+              </p>
+              <Link 
+                href="/#products" 
+                className="btn btn-primary px-8 py-3 inline-block"
+              >
+                Shop Collection
               </Link>
+            </div>
+            
+            {/* Art Deco Decorative Element */}
+            <div className="relative mx-auto" style={{ maxWidth: '500px' }}>
+              <div className="aspect-w-1 aspect-h-1 relative">
+                <div className="absolute inset-0 border-3 border-shell-amber"></div>
+                <div className="absolute inset-4 bg-cream"></div>
+                <div className="absolute inset-8 bg-shell-brown bg-opacity-5 flex items-center justify-center">
+                  <span className="font-display text-8xl text-shell-amber">T</span>
+                </div>
+                
+                {/* Corner Accents */}
+                <div className="absolute top-0 left-0 w-8 h-8 border-t-3 border-l-3 border-accent-gold"></div>
+                <div className="absolute top-0 right-0 w-8 h-8 border-t-3 border-r-3 border-accent-gold"></div>
+                <div className="absolute bottom-0 left-0 w-8 h-8 border-b-3 border-l-3 border-accent-gold"></div>
+                <div className="absolute bottom-0 right-0 w-8 h-8 border-b-3 border-r-3 border-accent-gold"></div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Featured products section */}
-      <section id="products" className="py-16">
+      {/* Features Section */}
+      <section className="py-16 bg-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Featured Products</h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Check out our latest products curated just for you.
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center p-6">
+              <div className="w-16 h-16 mx-auto bg-shell-gold rounded-full flex items-center justify-center mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-shell-brown" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                </svg>
+              </div>
+              <h3 className="font-display text-xl text-shell-brown mb-2">Premium Quality</h3>
+              <div className="w-12 h-0.5 bg-shell-amber mx-auto mb-3"></div>
+              <p className="text-dark-brown">Carefully selected materials and expert craftsmanship in every product.</p>
+            </div>
+            
+            <div className="text-center p-6">
+              <div className="w-16 h-16 mx-auto bg-shell-gold rounded-full flex items-center justify-center mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-shell-brown" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="font-display text-xl text-shell-brown mb-2">Swift Delivery</h3>
+              <div className="w-12 h-0.5 bg-shell-amber mx-auto mb-3"></div>
+              <p className="text-dark-brown">Fast and reliable shipping with careful handling for perfect arrival.</p>
+            </div>
+            
+            <div className="text-center p-6">
+              <div className="w-16 h-16 mx-auto bg-shell-gold rounded-full flex items-center justify-center mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-shell-brown" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+              <h3 className="font-display text-xl text-shell-brown mb-2">Secure Shopping</h3>
+              <div className="w-12 h-0.5 bg-shell-amber mx-auto mb-3"></div>
+              <p className="text-dark-brown">Protected transactions and discreet packaging for peace of mind.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Products */}
+      <section id="products" className="py-16 bg-cream relative">
+        <div className="absolute inset-0 tortoise-overlay opacity-[0.02]"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="text-center mb-12">
+            <h2 className="art-deco-header mx-auto">Featured Collection</h2>
+            <p className="text-dark-brown max-w-2xl mx-auto">
+              Discover our carefully curated selection of premium products.
             </p>
           </div>
 
           <ProductGrid products={mappedProducts} />
 
           <div className="mt-12 text-center">
-            <Link href="/products" className="btn btn-primary">
+            <Link href="/products" className="btn btn-secondary">
               View All Products
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Features section */}
-      <section className="bg-gray-50 dark:bg-gray-900 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Why Shop With Us</h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center p-6">
-              <div className="mx-auto w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary-600 dark:text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-medium text-gray-900 dark:text-white mb-2">Quality Products</h3>
-              <p className="text-gray-600 dark:text-gray-400">All our products are carefully selected for quality and durability.</p>
-            </div>
-            <div className="text-center p-6">
-              <div className="mx-auto w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary-600 dark:text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-medium text-gray-900 dark:text-white mb-2">Fast Shipping</h3>
-              <p className="text-gray-600 dark:text-gray-400">Get your orders delivered quickly with our express shipping options.</p>
-            </div>
-            <div className="text-center p-6">
-              <div className="mx-auto w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary-600 dark:text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-medium text-gray-900 dark:text-white mb-2">Secure Payments</h3>
-              <p className="text-gray-600 dark:text-gray-400">Shop with confidence using our secure payment methods.</p>
-            </div>
-          </div>
+      {/* Art Deco Banner */}
+      <section className="py-16 bg-shell-brown relative overflow-hidden">
+        {/* Decorative elements */}
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-shell-caramel via-shell-amber to-accent-gold"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-accent-gold via-shell-amber to-shell-caramel"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="font-display text-3xl md:text-4xl text-shell-gold mb-6">
+            Timeless Elegance, Modern Functionality
+          </h2>
+          <p className="text-shell-gold text-lg max-w-3xl mx-auto mb-8 opacity-90">
+            Join our exclusive collection of customers who appreciate refined aesthetics and exceptional quality.
+          </p>
+          <Link href="/products" className="btn border-2 border-shell-gold text-shell-gold hover:bg-shell-gold hover:text-shell-brown">
+            Explore Our Philosophy
+          </Link>
         </div>
       </section>
     </div>

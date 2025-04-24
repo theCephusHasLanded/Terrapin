@@ -5,19 +5,28 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'display': ['var(--font-playfair)', 'serif'],
+        'sans': ['var(--font-montserrat)', 'sans-serif'],
+      },
       colors: {
-        primary: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
-        },
+        'shell-brown': '#5E3023',
+        'shell-amber': '#BC6C25',
+        'shell-caramel': '#DDA15E',
+        'shell-gold': '#FEFAE0',
+        'cream': '#FDFCF5',
+        'dark-brown': '#283618',
+        'sage': '#606C38',
+        'accent-gold': '#D4AF37',
+      },
+      borderWidth: {
+        '3': '3px',
+      },
+      backgroundImage: {
+        'tortoise-pattern': "url('/images/tortoise-pattern.png')",
+      },
+      boxShadow: {
+        'art-deco': '0 4px 6px -1px rgba(94, 48, 35, 0.1), 0 2px 4px -1px rgba(94, 48, 35, 0.06)',
       },
     },
   },

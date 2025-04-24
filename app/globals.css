@@ -3,36 +3,113 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-rgb: 15, 23, 42;
-  }
+  --foreground-rgb: 40, 54, 24; /* dark-brown */
+  --background-rgb: 253, 252, 245; /* cream */
 }
 
 body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
+  font-family: var(--font-montserrat);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-playfair);
+}
+
+/* Responsive aspect ratios */
+.aspect-w-1 {
+  position: relative;
+  padding-bottom: 100%; /* 1:1 aspect */
+}
+
+.aspect-w-1 > * {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+/* Art Deco inspired decorative elements */
+.art-deco-divider {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+}
+
+.art-deco-border {
+  @apply border-3 border-shell-amber;
+  position: relative;
+}
+
+.art-deco-border::before,
+.art-deco-border::after {
+  content: '';
+  position: absolute;
+  height: 10px;
+  width: 10px;
+  background-color: #D4AF37;
+}
+
+.art-deco-border::before {
+  top: -5px;
+  left: -5px;
+}
+
+.art-deco-border::after {
+  bottom: -5px;
+  right: -5px;
+}
+
+/* Tortoise shell pattern overlay */
+.tortoise-overlay {
+  background-image: radial-gradient(#5E3023 15%, transparent 16%),
+                    radial-gradient(#BC6C25 15%, transparent 16%);
+  background-size: 12px 12px;
+  background-position: 0 0, 6px 6px;
+  opacity: 0.05;
 }
 
 @layer components {
   .btn {
-    @apply px-4 py-2 rounded-md font-medium transition-colors;
+    @apply px-4 py-2 rounded-none font-medium transition-all duration-300 font-sans uppercase tracking-wider;
   }
   
   .btn-primary {
-    @apply bg-primary-600 text-white hover:bg-primary-700;
+    @apply bg-shell-brown text-shell-gold hover:bg-shell-amber relative overflow-hidden;
+  }
+  
+  .btn-primary::after {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-accent-gold to-transparent opacity-0 transition-opacity;
+  }
+  
+  .btn-primary:hover::after {
+    @apply opacity-20;
   }
   
   .btn-secondary {
-    @apply bg-gray-200 text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600;
+    @apply bg-shell-gold text-dark-brown border border-shell-amber hover:bg-shell-caramel hover:text-dark-brown;
   }
   
   .card {
-    @apply bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden;
+    @apply bg-cream border border-shell-caramel rounded-none shadow-art-deco overflow-hidden transition-all duration-300;
+  }
+
+  .card:hover {
+    @apply border-shell-amber shadow-lg;
+  }
+  
+  /* Art deco header styling */
+  .art-deco-header {
+    @apply font-display text-3xl md:text-4xl text-shell-brown relative pb-2 mb-6 inline-block;
+  }
+  
+  .art-deco-header::after {
+    content: '';
+    @apply absolute bottom-0 left-0 right-0 h-1 bg-accent-gold;
+    width: 50%;
   }
 }

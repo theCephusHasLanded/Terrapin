@@ -15,44 +15,54 @@ export default function ProductCard({ product }: ProductCardProps) {
   const [imageError, setImageError] = useState(false);
 
   return (
-    <div className="card h-full flex flex-col">
-      <Link href={`/product/${product.id}`} className="flex-shrink-0 relative h-48 overflow-hidden">
+    <div className="card group h-full flex flex-col">
+      <Link href={`/product/${product.id}`} className="flex-shrink-0 relative h-60 overflow-hidden">
         {product.image && !imageError ? (
           <Image 
             src={product.image} 
             alt={product.name} 
-            className="object-cover hover:scale-105 transition-transform duration-300"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             onError={() => setImageError(true)}
           />
         ) : (
-          <div className="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-500 dark:text-gray-400">
+          <div className="w-full h-full bg-shell-gold flex items-center justify-center">
             <div className="text-center p-4">
-              <div className="text-4xl mb-2">📦</div>
-              <div>{product.name}</div>
+              <div className="font-display text-4xl mb-2 text-shell-brown">T</div>
+              <div className="text-dark-brown text-sm uppercase tracking-widest font-medium">{product.category}</div>
             </div>
           </div>
         )}
-      </Link>
-      <div className="p-4 flex flex-col flex-grow">
-        <Link href={`/product/${product.id}`} className="mb-2 block">
-          <h3 className="text-lg font-medium text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400">{product.name}</h3>
-        </Link>
-        <div className="text-sm text-gray-500 dark:text-gray-400 mb-3 flex-grow line-clamp-2">
-          {product.description}
+        
+        {/* Art Deco corner accent */}
+        <div className="absolute top-0 left-0 w-10 h-10 overflow-hidden">
+          <div className="absolute top-0 left-0 w-20 h-20 bg-shell-amber opacity-80 rotate-45 transform origin-top-left"></div>
         </div>
-        <div className="flex items-center justify-between mt-auto">
-          <span className="text-lg font-semibold text-gray-900 dark:text-white">
+      </Link>
+      
+      <div className="p-6 flex flex-col flex-grow">
+        <div className="mb-2 flex items-baseline justify-between">
+          <Link href={`/product/${product.id}`} className="block">
+            <h3 className="font-display text-xl text-shell-brown group-hover:text-shell-amber transition-colors">
+              {product.name}
+            </h3>
+          </Link>
+          <span className="text-lg font-medium text-shell-brown">
             ${product.price.toFixed(2)}
           </span>
-          <button 
-            onClick={() => addItem(product, 1)}
-            className="btn btn-primary"
-          >
-            Add to Cart
-          </button>
         </div>
+        
+        <div className="text-sm text-dark-brown mt-2 mb-4 flex-grow line-clamp-2">
+          {product.description}
+        </div>
+
+        <button 
+          onClick={() => addItem(product, 1)}
+          className="btn btn-primary w-full"
+        >
+          Add to Cart
+        </button>
       </div>
     </div>
   );
