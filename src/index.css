@@ -1,0 +1,88 @@
+/* Global styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Art deco styling elements */
+.art-deco-header {
+  position: relative;
+  display: inline-block;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.art-deco-header::before,
+.art-deco-header::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 50px;
+  height: 1px;
+  background-color: #A67D52; /* shell-amber */
+}
+
+.art-deco-header::before {
+  right: 100%;
+  margin-right: 1rem;
+}
+
+.art-deco-header::after {
+  left: 100%;
+  margin-left: 1rem;
+}
+
+/* Tortoise shell pattern overlay using CSS */
+.tortoise-overlay {
+  opacity: 0.1;
+  background-image: 
+    radial-gradient(circle at 25% 25%, #75543E 2px, transparent 2px),
+    radial-gradient(circle at 75% 75%, #75543E 2px, transparent 2px),
+    radial-gradient(circle at 75% 25%, #A67D52 2px, transparent 2px),
+    radial-gradient(circle at 25% 75%, #A67D52 2px, transparent 2px);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 0, 0 0, 0 0;
+  mix-blend-mode: multiply;
+}
+
+/* Remove arrows from number inputs */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* Link transitions */
+a {
+  transition: color 0.3s ease;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f5f2e9; /* cream */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #a67d52; /* shell-amber */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #75543e; /* shell-brown */
+}
