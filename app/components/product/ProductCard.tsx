@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Product } from '../../lib/types';
@@ -11,21 +12,26 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   const { addItem } = useCart();
+  const [imageError, setImageError] = useState(false);
 
   return (
     <div className="card h-full flex flex-col">
       <Link href={`/product/${product.id}`} className="flex-shrink-0 relative h-48 overflow-hidden">
-        {product.image ? (
+        {product.image && !imageError ? (
           <Image 
             src={product.image} 
             alt={product.name} 
             className="object-cover hover:scale-105 transition-transform duration-300"
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            onError={() => setImageError(true)}
           />
         ) : (
           <div className="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-500 dark:text-gray-400">
-            No Image
+            <div className="text-center p-4">
+              <div className="text-4xl mb-2">📦</div>
+              <div>{product.name}</div>
+            </div>
           </div>
         )}
       </Link>
