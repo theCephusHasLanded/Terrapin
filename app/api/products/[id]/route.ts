@@ -1,14 +1,13 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '../../../lib/db';
 
-// Using context parameter typed with "any" to avoid type errors
-export async function GET(
-  request: Request,
-  context: any
-) {
+// Completely removing the context parameter and using a different approach
+export async function GET(request: Request) {
   try {
-    // Extract ID from the params
-    const { id } = context.params;
+    // Get URL parameters (we'll use this instead of path params)
+    const url = new URL(request.url);
+    const pathParts = url.pathname.split('/');
+    const id = pathParts[pathParts.length - 1]; // Get the ID from the path
     
     if (!id) {
       return NextResponse.json({ error: 'Product ID is required' }, { status: 400 });
